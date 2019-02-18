@@ -59,7 +59,7 @@
 
             \begin{enumerate}
                 \item Demuestre que $f_1$ y $f_2$ son funciones convexas \\
-                \
+
                     \textbf{Solución:}
 
                     Una función $f$ es convexa si se cumple que:
@@ -79,14 +79,25 @@
                         \therefore \; f_1 \text{ es convexa} \quad \blacksquare
                     \end{gathered} \end{split} \end{equation*}
 
+                    \begin{figure}
+                        \centering
+                        \def\svgwidth{\columnwidth}
+                        \input{/Users/pablotrinidad/Desktop/f1.svg}
+                    \end{figure}
+
                     Para $f_2(x)$:
                     \begin{equation*} \begin{split} \begin{gathered}
                         f_2'(x) =  6 x^5  - 30 e x^4  + 60 e^2 x^3  - 60 e^3 x^2 + 30 e^4 x - 6 e^5  \\
                         f_2''(x) = 30 x^4 - 120 e x^3 + 180 e^2 x^2 - 120 e^3 x  + 30 e^4 \\
                         f_2''(x) = 30(e - x)^4 \\
                         \Rightarrow f_2''(x) > 0 \\
-                        \therefore \; f_1 \text{ es convexa} \quad \blacksquare
+                        \therefore \; f_2 \text{ es convexa} \quad \blacksquare
                     \end{gathered} \end{split} \end{equation*}
+
+                \item Utilice el algoritmo del descenso por gradiente implementado
+                para minimizarlas. Use $x_0 = 0$ como punto inicial y $\alpha$
+                arbitrario. ¿Qué valores de $\alpha$ hacen más eficiente el algoritmo
+                para cada función?
             \end{enumerate}
     \end{enumerate}
 
