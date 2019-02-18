@@ -1,0 +1,95 @@
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+
+\usepackage{enumitem}
+
+\newcommand{\ihat}{\hat{\textbf{\i}}}
+\newcommand{\jhat}{\hat{\textbf{\j}}}
+\newcommand{\uhat}{\hat{\textbf{u}}}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    {\scshape\LARGE Universidad Nacional Autónoma de México \par}
+
+    \vspace{1cm}
+    {\scshape\Large Facultad de Ciencias\par}
+    \vspace{1.5cm}
+
+    \begin{center}
+        \includegraphics[scale=.1]{../../assets/img/logo.png}
+    \end{center}
+
+    \vspace{.8 cm}
+
+    {\LARGE Tarea 02: \par}
+    {\huge\bfseries Convexidad, vecindarios, búsqueda local: Hill Climbing y Búsqueda Tabú \par}
+
+    \vspace{0.5cm}
+    \large{\itshape{Pablo A. Trinidad Paz}} \small{ - 419004279}
+
+    \vfill
+
+    Trabajo presentado como parte del curso de
+    \textbf{Cómputo Evolutivo}
+    impartido por el profesor \textbf{Mario Iván Jaen Márquez}. \par
+    \vspace{0.5cm}
+    Fecha de entrega: \textbf{22 de Febrero de 2019}.
+\end{titlepage}
+
+\section{Teoría}
+    \begin{enumerate}
+        \item Sean $f_2, f_2: \mathbb{R} \rightarrow \mathbb{R}$ dadas por
+            \begin{equation*} \begin{split} \begin{aligned}
+                f_1(x) &= x^2 - 2ex + e^2 - 2, \\
+                f_2(x) &= x^6 - 6ex^5 + 15e^2x^4 - 20e^3x^3 + 15e^4x^2 - 6e^5x + e^6 - 6 \\
+            \end{aligned} \end{split} \end{equation*} \\
+
+            \begin{enumerate}
+                \item Demuestre que $f_1$ y $f_2$ son funciones convexas \\
+                \
+                    \textbf{Solución:}
+
+                    Una función $f$ es convexa si se cumple que:
+                    \begin{equation*} \begin{split} \begin{gathered}
+                        \forall x, y \in Dom(f)  \text{ y } \forall a \in [0, 1] \\
+                        f(ax + (1-a)y) \leq af(x) + (1 - a)f(y).
+                    \end{gathered} \end{split} \end{equation*}
+                    Además, se cumple que si la función es doblemente derivable
+                    (y de una sola variable) es convexa en un intervalo sí y solo sí
+                    su segunda derivada no es negativa.
+
+                    Para $f_1(x)$:
+                    \begin{equation*} \begin{split} \begin{gathered}
+                        f_1'(x) = 2x - 2e \\
+                        f_1''(x) = 2 \\
+                        \Rightarrow f_1''(x) > 0 \\
+                        \therefore \; f_1 \text{ es convexa} \quad \blacksquare
+                    \end{gathered} \end{split} \end{equation*}
+
+                    Para $f_2(x)$:
+                    \begin{equation*} \begin{split} \begin{gathered}
+                        f_2'(x) =  6 x^5  - 30 e x^4  + 60 e^2 x^3  - 60 e^3 x^2 + 30 e^4 x - 6 e^5  \\
+                        f_2''(x) = 30 x^4 - 120 e x^3 + 180 e^2 x^2 - 120 e^3 x  + 30 e^4 \\
+                        f_2''(x) = 30(e - x)^4 \\
+                        \Rightarrow f_2''(x) > 0 \\
+                        \therefore \; f_1 \text{ es convexa} \quad \blacksquare
+                    \end{gathered} \end{split} \end{equation*}
+            \end{enumerate}
+    \end{enumerate}
+
+\section{Práctica}
+
+\end{document}
