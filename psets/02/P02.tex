@@ -57,7 +57,7 @@
             \begin{equation*} \begin{split} \begin{aligned}
                 f_1(x) &= x^2 - 2ex + e^2 - 2, \\
                 f_2(x) &= x^6 - 6ex^5 + 15e^2x^4 - 20e^3x^3 + 15e^4x^2 - 6e^5x + e^6 - 6 \\
-            \end{aligned} \end{split} \end{equation*} \\
+            \end{aligned} \end{split} \end{equation*}
 
             \begin{enumerate}
                 \item Demuestre que $f_1$ y $f_2$ son funciones convexas \\
@@ -95,7 +95,8 @@
                 arbitrario. ¿Qué valores de $\alpha$ hacen más eficiente el algoritmo
                 para cada función? \\
 
-                    \textbf{Solución:} \\
+                    \textbf{Solución:}
+
                     Para responder a la pregunta anterior se corrió el
                     descenso por gradiente con múltiples valores de $\alpha$
                     y se determinó que el valor de $\alpha$ más eficiente sería
@@ -115,7 +116,7 @@
 
                     \clearpage
 
-                    \textbf{Resultados de $f_1$}: \\
+                    \textbf{Resultados de $f_1$}:
 
                     \begin{center}
                         Valores de $\alpha$ para la función $f_1$ \\
@@ -159,7 +160,7 @@
 
                     \clearpage
 
-                    \textbf{Resultados de $f_2$}: \\
+                    \textbf{Resultados de $f_2$}:
                     \begin{center}
                     Valores de $\alpha$ para la función $f_2$ \\
                     \begin{tabular}{c|r|l} 
@@ -199,6 +200,71 @@
                     \clearpage
 
             \end{enumerate}
+
+        \item Lea el capítulo 1 del siguiente libro para resolver las preguntas de
+              esta sección:
+        
+            \textit{Z. Michalewicz et al., How to Solve It: Modern Heuristics. Springer Berlin Heidelberg 2004}
+
+            \begin{enumerate}
+                \item Mencione al menos 2 razones por las cuales un problema del
+                      mundo real puede no ser resuelto fácilmente. NO USE ninguna
+                      de las razones enumeradas en la página 11 del capítulo 1.
+                      \begin{itemize}
+                          \item Algunos problemas son tan complejos que obtener
+                                un modelo que contemple todos sus aspectos puede
+                                ser muy complicado. Por otro lado, dado un modelo
+                                detallado del problema, derivar una solución óptima
+                                puede ser extremadamente complicado.
+                                Usualmente se reduce a dos opciones: 1. Modelar el
+                                problema contemplando todos los aspectos y obtener una
+                                solución aproximada usando métodos no convencionales
+                                o 2. Aproximar un segundo modelo que imite las
+                                características del problema y obtener una solución
+                                exacta a ese modelo aproximado por métodos convencionales.
+                                \begin{equation*} \begin{split} \begin{gathered}
+                                    \text{1) }\mathrm{Problem} \implies \mathrm{Model_a} \implies \mathrm{Solution_p}(\mathrm{Model_a}) \\
+                                    \text{2) }\mathrm{Problem} \implies \mathrm{Model_p} \implies \mathrm{Solution_a}(\mathrm{Model_p})
+                                \end{gathered} \end{split} \end{equation*}
+                          \item \textbf{Los problemas cambian con el tiempo}. Si derivar un modelo
+                                (de cualquier tipo) al problema fue costoso y no contempla
+                                que la naturaleza del problema cambió mientras se derivaba,
+                                éste puede terminar siendo obsoleto. Además, existe otra
+                                complicación: \textbf{las limitantes del problema}. Las
+                                limitantes, aunque pueden reducir el tamaño del espacio
+                                de búsqueda, suelen terminar agregando más complejidad
+                                al modelo ya que no todas las posibles soluciones cumplirán
+                                necesariamente con las limitantes.
+                      \end{itemize}
+
+                \item Supongamos que la optimización de una función $f$ requiere de
+                      10 variables de decisión $x_i(i = 1,...,10)$, cada una de las
+                      cuales está en el dominio $-50 \leq x_i \leq 50$.
+                      \begin{itemize}
+                        \item Si $x_i$ puede tomar solo valores enteros ¿cuál
+                              es el tamaño del espacio de búsqueda de este problema? \\
+
+                              \textbf{Soluución:}
+                              Existen 101 enteros en el rango $[-50, 50]$, por lo tanto
+                              hay $101^{10}$ combinaciones posibles. \\
+
+                        \item Si $x_i$ puede tomar valores reales y se usa
+                              una precisión de ocho lugares decimales ¿cuál
+                              es el tamaño del espacio de búsqueda del problema?
+                              \textbf{Soluución:}
+
+                              \textbf{Soluución:}
+                              Existen $10^8$ números decimales entre cada entero
+                              (incluyéndolo) y hay 101 enteros disponibles en el
+                              rango propuesto, es decir, hay $101 \times 10^8$
+                              valores disponibles, por lo tanto hay 
+                              $(101 \times 10^8)^{10} \approx 1.1 \times 10^{100}$
+                              combinaciones.
+                      \end{itemize}
+                      
+            \end{enumerate}
+
+
     \end{enumerate}
 
 \section{Práctica}
