@@ -7,6 +7,8 @@
 \usepackage{graphicx}
 \usepackage{mathtools}
 
+\usepackage{multicol}
+
 \usepackage{enumitem}
 
 \newcommand{\ihat}{\hat{\textbf{\i}}}
@@ -91,7 +93,89 @@
                 \item Utilice el algoritmo del descenso por gradiente implementado
                 para minimizarlas. Use $x_0 = 0$ como punto inicial y $\alpha$
                 arbitrario. ¿Qué valores de $\alpha$ hacen más eficiente el algoritmo
-                para cada función?
+                para cada función? \\
+
+                    \textbf{Solución:} \\
+                    Para responder a la pregunta anterior se corrió el
+                    descenso por gradiente con múltiples valores de $\alpha$
+                    y se determinó que el valor de $\alpha$ más eficiente sería
+                    aquel que lograra encontrar un óptimo en el menor número
+                    de iteraciones. Para saber si el valor óptimo obtenido
+                    a partir de dicha $\alpha$ era aceptable, se calculó la
+                    desviación estándar, promedio y media de los resultados
+                    de cada prueba. \\
+
+                    Para ambas funciones, el gradiente corrió bajo los
+                    siguientes parámetros:
+
+                        \begin{itemize}
+                            \item Precisión: $1 \times 10^{-8}$
+                            \item Número máximo de iteraciones: $10^6$
+                        \end{itemize}
+
+                    \clearpage
+
+                    \textbf{Resultados de $f_1$}: \\
+
+                    \begin{center}
+                        Valores de $\alpha$ para la función $f_1$ \\
+                        \begin{tabular}{c|r|l} 
+                            \hline
+                            \multicolumn{1}{|c|}
+                            {$\alpha$} & \textbf{Número de iteraciones} & \multicolumn{1}{l|}{\textbf{Valor mínimo}}  \\ 
+                            \hline
+                            0.000005    &   790773  &   2.7172818427188603  \\
+                            0.00001     &   430042  &   2.7177818402339007   \\
+                            0.00005     &   102100  &   2.7181818454738185  \\
+                            0.0001      &   54513   &   2.718231838600649 \\
+                            0.0005      &   12508   &   2.7182718417772485 \\
+                            0.001       &   6598    &   2.7182768441392824 \\
+                            0.005       &   1476    &   2.7182808470688657 \\
+                            0.01        &   769     &   2.71828134188752 \\
+                            0.05        &   164     &   2.7182817433322994 \\
+                            0.1         &   81      &   2.718281790036739 \\
+                            0.5         &   2       &   2.718281828459045
+                        \end{tabular}
+                    \end{center}
+
+                    \begin{multicols}{2}
+                        \begin{center}
+                            \includegraphics[scale=.4]{assets/theory/1-a/f1-performance.png}
+                        \end{center}
+                        \begin{center}
+                            \includegraphics[scale=.5]{assets/theory/1-a/f1-dist.png}
+                        \end{center}
+                    \end{multicols}
+
+                    Con una desviación estándar $\sigma \approx .000303$,
+                    promedio $\mu \approx 2.7181303276$ y media $\approx 2.7182768441$
+                    se puede concluir de forma segura que el valor óptimo de $\alpha$ para
+                    $f_1$ es \textbf{0.5} y que el mínimo se encuentra en
+                    $x=2.718281828459045$.
+
+                    \begin{center}
+                        \includegraphics[scale=.5]{assets/theory/1-a/f1-minimum.png}
+                    \end{center}
+
+                    \clearpage
+
+                    \textbf{Resultados de $f_2$}: \\
+                    \begin{center}
+                    Valores de $\alpha$ para la función $f_2$ \\
+                    \begin{tabular}{c|r|l} 
+                        \hline
+                        \multicolumn{1}{|c|}
+                        {$\alpha$} & \textbf{Número de iteraciones} & \multicolumn{1}{l|}{\textbf{Valor mínimo}}  \\ 
+                        \hline
+                            0.000005   &   1000000     &   2.3511877960913052 \\
+                            0.00001   &   1000000     &   2.398706503240198 \\
+                            0.00005   &   1000000     &   2.4866593461920012 \\
+                            0.0001  &   1000000     &   2.51664267509827 \\
+                            0.0005  &   1000000     &   2.57213799938737 \\
+                            0.001   &   1000000     &   2.591415514678928
+
+                        \end{tabular}
+                    \end{center}
             \end{enumerate}
     \end{enumerate}
 
