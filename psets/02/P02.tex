@@ -147,14 +147,14 @@
                         \end{center}
                     \end{multicols}
 
-                    Con una desviación estándar $\sigma \approx .000303$,
+                    Con una desviación estándar $\sigma \approx 0.000303$,
                     promedio $\mu \approx 2.7181303276$ y media $\approx 2.7182768441$
                     se puede concluir de forma segura que el valor óptimo de $\alpha$ para
                     $f_1$ es \textbf{0.5} y que el mínimo se encuentra en
                     $x=2.718281828459045$.
 
                     \begin{center}
-                        \includegraphics[scale=.5]{assets/theory/1-a/f1-minimum.png}
+                        \includegraphics[scale=.6]{assets/theory/1-a/f1-minimum.png}
                     \end{center}
 
                     \clearpage
@@ -176,6 +176,33 @@
 
                         \end{tabular}
                     \end{center}
+
+                    \begin{multicols}{2}
+                        \begin{center}
+                            \includegraphics[scale=.45]{assets/theory/1-a/f2-performance.png}
+                        \end{center}
+                        \begin{center}
+                            \includegraphics[scale=.45]{assets/theory/1-a/f2-dist.png}
+                        \end{center}
+                    \end{multicols}
+
+                    Con una desviación estándar $\sigma \approx 0.0868$,
+                    promedio $\mu \approx 2.4861249724$ y media $\approx 2.5016510106$
+                    podemos escoger \textbf{el mínimo en} $x=2.51664267509827$ aunque realmente
+                    se va a encontrar en el rango $[\mu - \sigma, \mu + \sigma]$ la
+                    mayoría de los casos.
+                    Adicionalmente, y debido a la naturaleza de la función, todos
+                    los valores $\alpha$ agotaron el máximo número de iteraciones
+                    del descenso por gradiente por lo que no existe un valor óptimo
+                    de $\alpha$ pero podemos escoger el que nos generó el mínimo, es
+                    decir, $\alpha = 0.0001$.
+
+                    \begin{center}
+                        \includegraphics[scale=.6]{assets/theory/1-a/f2-minimum.png}
+                    \end{center}
+
+                    \clearpage
+
             \end{enumerate}
     \end{enumerate}
 
