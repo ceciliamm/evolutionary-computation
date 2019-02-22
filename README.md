@@ -1,7 +1,7 @@
-# Cómputo Evolutivo
+# Evolutionary Computation
 
 Projects, problem sets and homework related to the
-[Evolutionary Comutation](https://en.wikipedia.org/wiki/Evolutionary_computation)
+[Evolutionary Computation](https://en.wikipedia.org/wiki/Evolutionary_computation)
 course I've taken at UNAM's Faculty of Science imparted by
 [**@mjaenm**](https://github.com/mjaenm) as part of my CS curriculum.
 
