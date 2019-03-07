@@ -69,3 +69,7 @@ class Museum:
         )
         C = 2 * np.arctan2(np.sqrt(A), np.sqrt(1 - A))
         return self.R * C * self.N
+
+    def __str__(self):
+        """Return museum name."""
+        return self.name
