@@ -16,8 +16,8 @@ class Museum:
     def __init__(self, pk, name, lat, long, N):
         self.pk = pk
         self.name = name
-        self._latitude = lat
-        self._longitude = long
+        self.latitude = lat
+        self.longitude = long
 
         # System normalizer
         self.N = N
@@ -26,14 +26,14 @@ class Museum:
         self.connections = {}
 
     @property
-    def lat(self, rad=False):
+    def lat_rad(self):
         """Return latitude, in radians if requested."""
-        return np.radians(_latitude) if rad else self._latitude
+        return np.radians(self.latitude)
 
     @property
-    def lon(self, rad=False):
+    def lon_rad(self):
         """Return longitude, in radians if requested."""
-        return np.radians(_longitude) if rad else self._longitude
+        return np.radians(self.longitude)
 
     def is_connected_to(self, museum):
         """Given a museum ID, return True if a connection exists."""
@@ -46,7 +46,7 @@ class Museum:
         if not self.is_connected_to(museum):
             self.connections[museum] = distance
 
-    def get_distance_from(self, museum):
+    def distance_to(self, museum):
         """Return distance from given museum object.
 
         If no connection exists, return the weight specified by
@@ -59,11 +59,11 @@ class Museum:
     def __compute_missing_connection_weight(self, museum):
         """Compute custom weight as specified in the problem set."""
         A = (
-            (np.sin((self.lat(rad=True) - museum.lat(rad=True)) / 2) ** 2) +
+            (np.sin((self.lat_rad - museum.lat_rad) / 2) ** 2) +
             (
-                np.cos(museum.lat(rad=True)) *
-                np.cos(self.lat(rad=True)) *
-                np.sin((self.lon(rad=True) - museum.lon(rad=True)) / 2) ** 2
+                np.cos(museum.lat_rad) *
+                np.cos(self.lat_rad) *
+                np.sin((self.lon_rad - museum.lon_rad) / 2) ** 2
             )
 
         )
@@ -72,4 +72,7 @@ class Museum:
 
     def __str__(self):
         """Return museum name."""
-        return self.name
+        return str(self.pk)
+
+    def __repr__(self):
+        return str(self)

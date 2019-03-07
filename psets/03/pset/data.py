@@ -20,21 +20,21 @@ def load_data():
                 N=1
             )
             museums_dict[m['id']] = museum
-            print('\t✅', museum.name)
+            print('\t✅[{}]'.format(museum.pk), museum.name)
 
         distances = []
-        print('Adding edges:')
+        print('\nAdding edges:')
         for e in data['edges']:
             m1 = museums_dict[e['m1']]
             m2 = museums_dict[e['m2']]
             m1.connect_to(m2.pk, e['distance'])
             m2.connect_to(m1.pk, e['distance'])
             distances.append(e['distance'])
-            print('\t🔗', m1, '+', m2)
+            print('\t🔗[{}] <---> [{}]'.format(m1.pk, m2.pk))
 
-        L = sorted(distances, reverse=True)[:-1]
+        L = sorted(distances)[1:]
         N = sum(L)
-        print('Adding normalizer')
+        print('\nAdding normalizer')
         print('\tComputed:', N)
         for m in museums_dict.values():
             m.N = N
