@@ -1,0 +1,237 @@
+{
+    "museums": [
+      {
+        "id": 1,
+        "name": "Universum",
+        "latitude": 19.311509,
+        "longitude": -99.180575
+      },
+      {
+        "id": 2,
+        "name": "Templo Mayor",
+        "latitude": 19.434988,
+        "longitude": -99.131838
+      },
+      {
+        "id": 3,
+        "name": "Antiguo Colegio de San Idelfonso",
+        "latitude": 19.436577,
+        "longitude": -99.130851
+      },
+      {
+        "id": 4,
+        "name": "Palacio Nacional",
+        "latitude": 19.432641,
+        "longitude": -99.131194
+      },
+      {
+        "id": 5,
+        "name": "Museo Nacional del Arte",
+        "latitude": 19.436395,
+        "longitude": -99.139445
+      },
+      {
+        "id": 6,
+        "name": "Museo del Estanquillo",
+        "latitude": 19.43338,
+        "longitude": -99.136183
+      },
+      {
+        "id": 7,
+        "name": "Antiguo Palacio de Iturbide",
+        "latitude": 19.433825,
+        "longitude": -99.139048
+      },
+      {
+        "id": 8,
+        "name": "Museo Franz Mayer",
+        "latitude": 19.437224,
+        "longitude": -99.143329
+      },
+      {
+        "id": 9,
+        "name": "Museo de Memoria y Tolerancia",
+        "latitude": 19.434412,
+        "longitude": -99.144595
+      },
+      {
+        "id": 10,
+        "name": "Museo Soumaya",
+        "latitude": 19.440885,
+        "longitude": -99.204753
+      },
+      {
+        "id": 11,
+        "name": "Museo Casa del Risco",
+        "latitude": 19.345031,
+        "longitude": -99.191909
+      },
+      {
+        "id": 12,
+        "name": "Museo de El Carmen",
+        "latitude": 19.34489,
+        "longitude": -99.18986
+      },
+      {
+        "id": 13,
+        "name": "Museo de Arte Carrillo Gil",
+        "latitude": 19.349698,
+        "longitude": -99.19031
+      },
+      {
+        "id": 14,
+        "name": "Museo Casa de León Trotsky",
+        "latitude": 19.357978,
+        "longitude": -99.159347
+      },
+      {
+        "id": 15,
+        "name": "Museo de Historia Natural",
+        "latitude": 19.410363,
+        "longitude": -99.201404
+      },
+      {
+        "id": 16,
+        "name": "Museo de Arte Moderno",
+        "latitude": 19.423355,
+        "longitude": -99.179774
+      }
+    ],
+    "edges": [
+      {
+        "m1": 15,
+        "m2": 16,
+        "distance": 2690.160928528786
+      },
+      {
+        "m1": 1,
+        "m2": 11,
+        "distance": 3913.8229741328414
+      },
+      {
+        "m1": 1,
+        "m2": 12,
+        "distance": 3838.7318668866915
+      },
+      {
+        "m1": 1,
+        "m2": 13,
+        "distance": 4368.919908318641
+      },
+      {
+        "m1": 14,
+        "m2": 13,
+        "distance": 3377.385621869986
+      },
+      {
+        "m1": 12,
+        "m2": 13,
+        "distance": 536.874253590714
+      },
+      {
+        "m1": 11,
+        "m2": 12,
+        "distance": 215.61358094745924
+      },
+      {
+        "m1": 11,
+        "m2": 13,
+        "distance": 545.5601156258631
+      },
+      {
+        "m1": 14,
+        "m2": 11,
+        "distance": 3708.2901916394535
+      },
+      {
+        "m1": 14,
+        "m2": 15,
+        "distance": 7309.190604326924
+      },
+      {
+        "m1": 14,
+        "m2": 16,
+        "distance": 7581.127123499147
+      },
+      {
+        "m1": 15,
+        "m2": 10,
+        "distance": 3413.084649035193
+      },
+      {
+        "m1": 16,
+        "m2": 10,
+        "distance": 3266.0513431504646
+      },
+      {
+        "m1": 9,
+        "m2": 10,
+        "distance": 6350.928429946689
+      },
+      {
+        "m1": 9,
+        "m2": 16,
+        "distance": 3889.6845859673317
+      },
+      {
+        "m1": 2,
+        "m2": 3,
+        "distance": 204.83291430972847
+      },
+      {
+        "m1": 3,
+        "m2": 4,
+        "distance": 439.2764543562214
+      },
+      {
+        "m1": 2,
+        "m2": 4,
+        "distance": 269.65454849267496
+      },
+      {
+        "m1": 5,
+        "m2": 6,
+        "distance": 479.0999988235459
+      },
+      {
+        "m1": 5,
+        "m2": 7,
+        "distance": 288.877802237474
+      },
+      {
+        "m1": 5,
+        "m2": 8,
+        "distance": 417.70061597250026
+      },
+      {
+        "m1": 3,
+        "m2": 6,
+        "distance": 662.760080679652
+      },
+      {
+        "m1": 7,
+        "m2": 8,
+        "distance": 587.0048840350177
+      },
+      {
+        "m1": 7,
+        "m2": 6,
+        "distance": 304.5668955973115
+      },
+      {
+        "m1": 7,
+        "m2": 9,
+        "distance": 585.4905395987138
+      },
+      {
+        "m1": 8,
+        "m2": 9,
+        "distance": 339.80009501668843
+      },
+      {
+        "m1": 2,
+        "m2": 7,
+        "distance": 767.2571909365163
+      }
+    ]
+  }
