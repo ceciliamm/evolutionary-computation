@@ -1,0 +1,226 @@
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+
+\usepackage{multicol}
+
+\usepackage{enumitem}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+
+\renewcommand{\arraystretch}{1.5}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    {\scshape\LARGE Universidad Nacional Autónoma de México \par}
+
+    \vspace{1cm}
+    {\scshape\Large Facultad de Ciencias\par}
+    \vspace{1.5cm}
+
+    \begin{center}
+        \includegraphics[scale=.1]{../../assets/img/logo.png}
+    \end{center}
+
+    \vspace{.8 cm}
+
+    {\LARGE Tarea 04: \par}
+    {\huge\bfseries Introducción al algoritmo genético \par}
+
+    \vspace{0.5cm}
+    \large{\itshape{Pablo A. Trinidad Paz}} \small{ - 419004279}
+
+    \vfill
+
+    Trabajo presentado como parte del curso de
+    \textbf{Cómputo Evolutivo}
+    impartido por el profesor \textbf{Mario Iván Jaen Márquez}. \par
+    \vspace{0.5cm}
+    Fecha de entrega: \textbf{Lunes 19 de Marzo de 2019}.
+\end{titlepage}
+
+\section{Práctica}
+Implemente el algoritmo genético para que dados los siguientes ejercicios,
+el algoritmo se aproxime a un individuo que cumpla las condiciones necesarias.
+
+\begin{enumerate}
+    \item Genere un cromosoma cuyas características indiquen a una persona con
+    piel oscura, caballo negro, altura de 1.98 metros o cercana y complexidad
+    delgada.
+    \item Obtenga un cromosoma con las cualidades para ser luchador de sumo japonés
+    \footnote{Investigue los valores promedio de un luchador de sumo y de un hombre
+    japonés. Adjunte sus referencia}
+    \item Elija un personaje de la serie que prefiera\footnote{Puede ser de cualquier
+    tipo, ya sea un show de televisión, anime o serie animada, de preferencia use
+    características poco comunes} y ajuste el algoritmo para obtener
+    un cromosoma de características similares. Debe considerar por lo menos las
+    siguientes características:
+        \begin{itemize}
+            \item Color de cabello
+            \item Color de piel
+            \item Color de ojos
+            \item Altura
+            \item Complexión
+        \end{itemize}
+    Adjunte un enlace a la referencia del personaje del cual se está tomando la información.
+
+    La implementación del algoritmo debe cumplir lo siguiente:
+        \begin{itemize}
+            \item La población inicial debe ser aleatoria y de 100 individuos.
+            \item Para la probabilidad de mutación utilice 0.1.
+            \item Para el operador de cruza utilice el método de torneo en la
+                  elección de padres y dos puntos de cruce (two point crossover).
+            \item En la selección de individuos utilice ruleta.
+            \item El \textit{fitness} se va definir a discreción cuidando que el
+                  algoritmo garantice o se logre aproximar considerablemente a un individuo
+                  que cumpla las características solicitadas. Se recomienda la siguiente estructura:\\[\baselineskip]
+                  Sea $\mathcal{X}$ el individuo con las características deseadas y $x$ el individuo a evaluar.
+                  La función $f$ de \textit{fitness} es:
+                    \begin{equation*} \begin{split} \begin{gathered}
+                        f = \sum_{i=0}^{n} \big( \mathcal{X}[i] - x[i] \big)^2
+                    \end{gathered} \end{split} \end{equation*}
+                  donde $n$ es el número de características.
+            \item El cromosoma deberá considerar los valores de color de cabello, color
+                  de ojos y color de piel usando 3 valores para cada característica donde para cada
+                  valor el rango será entero $[0, 255]$; para el cabello y ojos será válido cualquier
+                  color, cuide que el valor de la tez de piel se vea natural, asimismo considere
+                  valores de altura coherentes (aproximadamente de $1$ a $2.20$ metros) y complexión,
+                  se deja a discreción agregar más valores al cromosoma.
+            \item Para graficar la imagen del individuo utilice la función indicada en el script
+                  adjunto, y para cada ejercicio adjunte la imagen del individui que mejor cumpla
+                  con los requisitos del ejercicio, su posible altura, complexión, el cromosoma, y
+                  en su caso, las características adicionales.
+        \end{itemize}
+\end{enumerate}
+\clearpage
+
+\section{Solución}
+
+\subsection{Implementación del algoritmo genético}
+En ésta sección abordaremos las múltiples estrategias utilizadas durante la implementación
+del algoritmo genético.
+
+\subsubsection{Representación}
+
+Con el objetivo de obtener una representación binaria del cromosoma se acordaron las siguientes
+abstracciones de cada una de las características:
+
+\begin{enumerate}
+    \item \textbf{Color}: Representado por un valor RGB de tal forma que
+          color $ \in \{0, 1,...,255\}^L, \; L=3$. Las características que usarán éste
+          tipo de valor serán el color de piel, el color del cabello y el color de ojos.
+    \item \textbf{Altura}: Medida en centímetros y válida en el rango $[0, 255]$. El rango
+          utilizado ignora la recomendación con el objetivo de poder utilizar 8 bits para
+          representarla.
+    \item \textbf{Complexión}: Definida arbitrariamente en el rango $[0, 15]$ donde una
+          complexión con valor $x=0$ se considera la complexión más pequeña posible y
+          una complexión $x=15$ la más grande posible, es decir, la complexión crece de
+          manera lineal de la más pequeña a la más grande conforme $x$ se crece. La
+          complexión puede ser representada utilizando 4 bits.
+\end{enumerate}
+
+Dicho lo anterior podemos definir la representación binaria del cromosoma de un individuo
+como la sucesión ordenada de dichas características de forma que los genes estén distribuidos
+de la siguiente manera: \\
+
+\begin{center} \begin{tabular}{ |c|c|c| }
+    \hline
+    \multicolumn{3}{|c|}{Distribución de genes dentro del cromosoma \scriptsize{(Indexado en 0)}} \\
+    \hline
+    Rango de bits & Característica & Rango en $\mathbb{Z}^+$\\
+    \hline
+    $[0, 23]$   & Color de cabello & $[0, 255]$ cada 8 bits \\
+    $[24, 47]$  & Color de ojos & $[0, 255]$ cada 8 bits \\
+    $[48, 71]$   & Color de piel & $[0, 255]$ cada 8 bits \\
+    $[72, 79]$   & Altura & $[0, 255]$ \\
+    $[80, 83]$   & Complexión & $[0, 15]$ \\
+    \hline
+\end{tabular} \end{center}
+
+Adicionalmente, la codificación de cada gen será mediante Gray code con el objetivo de
+reducir la distancia de Hamming.
+
+\subsubsection{Función objetivo}
+
+Gracias a que tenemos una representación binaria del cromosoma, que estamos utilizando
+Gray code para la codificación de cada valor, y que queremos que nuestras poblaciones
+asemejen lo más posible a un individuo dado, podemos establecer la función objetivo $f$
+como la distancia de Hamming entre la cadena del individuo ideal y el individuo a evaluar.
+Además, nótese que únicamente estaríamos realizando la decodificación al obtener un resultado aceptable.
+Si quisiéramos que la función $f$ esté en el rango $[0, 1]$, entonces podemos definirla
+como:
+
+\begin{equation*} \begin{split} \begin{gathered}
+    f(x) = 1 - \frac{h(\mathcal{X}, x)}{84}
+\end{gathered} \end{split} \end{equation*}
+
+Donde $\mathcal{X}$ es el individuo con características deseadas y $h(x, y)$ es la
+función que calcula la distancia de Hamming entre dos cadenas $x$ y $y$.
+
+\subsubsection{Inicialización}
+
+La inicialización de la población consiste en la creación de cadenas binarias
+aleatorias de longitud $L=84$. La población inicial tendrá 100 individuos.
+
+\subsubsection{Mecanismo de selección de padres}
+
+El método utilizado para la selección de de padres será Torneo ya que nos evitará
+la necesidad de contar con una noción del \textit{fitness} promedio de la población.
+La selección por torneo selecciona $\lambda$ mejores miembros de un subconjunto 
+aleatorio de $\mu$ elementos hasta completar la cantidad deseado de padres $\rho$. \\
+
+En nuestro caso particular deseamos obtener $\rho=6$ padres en cada iteración del
+algoritmo genético y lo haremos a través de conjuntos de $\mu=33$ elementos escogiendo
+$\lambda=2$ elementos en cada ronda del torneo con reemplazo.
+
+\subsubsection{Operador de cruza}
+
+El método utilizado será $n$-point crossover con $n=2$. En nuestro caso, las parejas
+de cruzamiento serán unidas en el mismo orden en el que hayan sido seleccionadas durante
+el torneo.
+
+\subsubsection{Operador de mutación}
+
+Tras la cruza, la mutación sucederá en los hijos resultantes invirtiendo cada bit
+de su representación genotípica con probabilidad $p_m=0.1$.
+
+\subsubsection{Selección de individuos}
+
+La selección de individuos seguirá el método \textit{fitness proportional selection}
+(también conocido como ruleta) usando \textbf{sigma scaling} descrito en \cite{iec}
+el cual define la función de probabilidad de que un elemento sea escogido en la
+ruleta como:
+    \begin{equation*} \begin{split} \begin{gathered}
+        f'(x) = \mathrm{max}(f(x) - \bar{f} - c*\sigma_f, 0 )
+    \end{gathered} \end{split} \end{equation*}
+
+Donde $f(x)$ es el fitness del individuo, $\bar{f}$ es el promedio del fitness
+de todos los individuos, $\sigma_f$ la desviación estándar y $c$ un valor constante,
+en nuestro caso $c=2$.
+
+El método \textit{FPS} asignará la probabilidad $f'(x)$ a todos los individuos
+y \textit{girará la ruleta} $N$ veces para obtener $N$ individuos. En nuetro caso
+$N=100$.
+\subsection{Resultados}
+
+
+% References
+\clearpage
+\begin{thebibliography}{9}
+
+    \bibitem{iec}
+      Eiben, A.E., Smith, J.E. (2015).
+      \textit{Introduction to Evolutionary Computing}.
+      Amsterdam, Netherlands: Springer 
+      2nd edition. 287 p.
+\end{thebibliography}
+
+\end{document}

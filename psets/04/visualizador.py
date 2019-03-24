@@ -1,7 +1,8 @@
 import cv2
 import numpy as np
 
-#Para cv2 los valores se toman como [azul,verde, rojo]
+
+#Para cv2 los valores se toman como [azul,verde, rojo] (BGR)
 def carga_pixeles():
     '''
     Funcion que dados los valores del archivo "Dibujo.txt" lee
@@ -25,7 +26,7 @@ def carga_pixeles():
     x[:,:, 0], x[:,:, 2] = x[:,:, 2], x[:,:, 0].copy()
     return x
 
-def grafica(r_ojos, g_ojos, b_ojos,r_tez,g_tez,b_tez,r_cab,g_cab,b_cab,nombre_imagen='imagen_act.png'):
+def grafica(ojos, tez, cabello,nombre_imagen='imagen_act.png'):
     '''
     Funcion que dados los valores de tez, ojos y cabello, genera la imagen
     y la guarda con nombre "imagen_act.png" por default
@@ -40,6 +41,10 @@ def grafica(r_ojos, g_ojos, b_ojos,r_tez,g_tez,b_tez,r_cab,g_cab,b_cab,nombre_im
     :param b_cab: Parametro de azul del cabello
     :param nombre_imagen: Nombre para guardar la imagen
     '''
+    r_ojos, g_ojos, b_ojos = ojos
+    r_tez, g_tez, b_tez = tez
+    r_cab, g_cab, b_cab = cabello
+
     dibujo = carga_pixeles()
     for i in range(0,dibujo.shape[0]):
         for j in range(0,dibujo.shape[1]):
@@ -53,3 +58,9 @@ def grafica(r_ojos, g_ojos, b_ojos,r_tez,g_tez,b_tez,r_cab,g_cab,b_cab,nombre_im
             elif dibujo[i,j][2] == 60 and dibujo[i,j][1] == 197 and dibujo[i,j][0]  == 217:
                 dibujo[i, j][0], dibujo[i, j][1], dibujo[i, j][2] = b_ojos, g_ojos, r_ojos
     cv2.imwrite(nombre_imagen, dibujo)
+
+
+ojos = (245, 253, 198)
+tez = (245, 195, 150)
+cabello = (44, 44, 84)
+grafica(ojos, tez, cabello)
