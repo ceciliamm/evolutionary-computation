@@ -21,8 +21,6 @@ class SGA:
     TOURNAMENT_GROUP_SIZE = 33
     WINNERS_PER_TOURNAMENT = 2
 
-    fitness_over_time = [[], []]  # A[0] being the mean and A[1] the standard deviation
-
     def __init__(
             self,
             mutation_prob: float,
@@ -40,13 +38,15 @@ class SGA:
         self.MAX_TRIALS = max_trials
         self.PRECISION = precision
 
+        self.fitness_over_time = [[], []]  # A[0] being the mean and A[1] the standard deviation
+        self.generations = 0
+
     def run(self):
         """Start SGA."""
         population = self.initialize()
         pop_mean, _ = self.population_fitness(population, update=True)
-        trials = 0
 
-        while trials < self.MAX_TRIALS and (1 - pop_mean) > self.PRECISION:
+        while self.generations < self.MAX_TRIALS and (1 - pop_mean) > self.PRECISION:
             parents = self.select_parents(population)
             offspring = self.recombine(parents)
             self.mutate(offspring)
@@ -54,7 +54,7 @@ class SGA:
             population = self.select_new_population(population + offspring)
 
             pop_mean, _ = self.population_fitness(population, update=True)
-            trials += 1
+            self.generations += 1
 
         self.last_pop = population
 
@@ -108,7 +108,7 @@ class SGA:
 
     def select_new_population(self, population: List[Avatar]) -> List[Avatar]:
         """Select new population of size POP_SIZE using FPS."""
-        pop_mean, pop_std = self.population_fitness(population, update=True)
+        pop_mean, pop_std = self.population_fitness(population, update=False)
 
         # Assign new temporal fitness to each individual
         for i in population:
