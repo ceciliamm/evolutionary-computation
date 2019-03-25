@@ -64,5 +64,9 @@ class Avatar:
 
     def __str__(self) -> str:
         """Return avatar's genome."""
-        return self.genome
+        return '{:.3f}: {}'.format(self.fitness, self.genome)
+
+    def __repr__(self) -> str:
+        """Return genome and fitness."""
+        return str(self)
 

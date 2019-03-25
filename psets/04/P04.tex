@@ -196,19 +196,23 @@ de su representación genotípica con probabilidad $p_m=0.1$.
 
 La selección de individuos seguirá el método \textit{fitness proportional selection}
 (también conocido como ruleta) usando \textbf{sigma scaling} descrito en \cite{iec}
-el cual define la función de probabilidad de que un elemento sea escogido en la
-ruleta como:
+para resolver los problemas de convergencia prematura. La nueva función objetivo
+para \textbf{sigma scaling} será la siguiente
     \begin{equation*} \begin{split} \begin{gathered}
-        f'(x) = \mathrm{max}(f(x) - \bar{f} - c*\sigma_f, 0 )
+        f'(x) = \mathrm{max}(f(x) - (\bar{f} - c \cdot \sigma_f), 0 )
     \end{gathered} \end{split} \end{equation*}
 
-Donde $f(x)$ es el fitness del individuo, $\bar{f}$ es el promedio del fitness
+Donde $f(x)$ es el fitness original del individuo, $\bar{f}$ es el promedio del fitness
 de todos los individuos, $\sigma_f$ la desviación estándar y $c$ un valor constante,
 en nuestro caso $c=2$.
 
-El método \textit{FPS} asignará la probabilidad $f'(x)$ a todos los individuos
+El método \textit{FPS} asignará la probabilidad $P_{FPS}(i)$ a todos los individuos
 y \textit{girará la ruleta} $N$ veces para obtener $N$ individuos. En nuetro caso
-$N=100$.
+$N=100$ y
+    \begin{equation*} \begin{split} \begin{gathered}
+        P_{FPS}(i) = \frac{f'_i}{\sum_{j=1}^{N} f'_j}
+    \end{gathered} \end{split} \end{equation*}
+
 \subsection{Resultados}
 
 
