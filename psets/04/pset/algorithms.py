@@ -26,7 +26,7 @@ class SGA:
             mutation_prob: float,
             role_model: Dict,
             max_trials: int = 10 ** 8,
-            precision: float = 0.03
+            precision: float = 0.01
     ) -> None:
         """Set SGA role model and mutation probability."""
         rm_genome = Avatar.build_genome_from_attributes(role_model)
