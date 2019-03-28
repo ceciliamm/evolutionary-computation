@@ -50,7 +50,7 @@ class SGA:
             offspring = self.recombine(parents)
             self.mutate(offspring)
 
-            population = self.select_new_population(population + offspring)
+            population = self.select_new_population(population + offspring, n=self.POP_SIZE)
 
             pop_mean = self.population_fitness(population, update=True)[0]
             self.generations += 1
@@ -69,14 +69,7 @@ class SGA:
 
     def select_parents(self, population: List[Individual]) -> List[tuple]:
         """Return sets of mating partners."""
-        mating_partners = []
-        pop = population[:]
-        while len(mating_partners) < self.PARENTS_COUNT // self.WINNERS_PER_TOURNAMENT:
-            random.shuffle(pop)
-            tournament = pop[:self.TOURNAMENT_GROUP_SIZE]
-            tournament.sort(key=lambda a: a.fitness, reverse=True)
-            mating_partners.append(tuple(tournament[:self.WINNERS_PER_TOURNAMENT]))
-        return mating_partners
+        return [tuple(self.select_new_population(population, n=2))]
 
     def recombine(self, parents: Tuple[Individual]) -> List[Individual]:
         """Generate offspring by using 1-point crossover."""
@@ -102,8 +95,8 @@ class SGA:
                 chromosome += str(int(allele) ^ 1) if random.random() < self.mutation_prob else allele
             i.chromosome = chromosome
 
-    def select_new_population(self, population: List[Individual]) -> List[Individual]:
-        """Select new population of size POP_SIZE using FPS."""
+    def select_new_population(self, population: List[Individual], n: int) -> List[Individual]:
+        """Select new population of size n using FPS."""
         pop_mean, pop_std, _ = self.population_fitness(population, update=False)
 
         # Assign new temporal fitness to each individual
@@ -118,7 +111,7 @@ class SGA:
         population.sort(key=lambda i: i.fps_prob)
 
         new_population = []
-        while len(new_population) < self.POP_SIZE:
+        while len(new_population) < n:
             state = random.random()
             for i in population:
                 state -= i.fps_prob

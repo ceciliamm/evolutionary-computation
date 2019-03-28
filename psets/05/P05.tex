@@ -52,20 +52,61 @@
           cada uno con $L$ bits. Seleccionamos aleatoriamente un punto de cruza
           $c \in {1,...,L-1}$ y realizamos la cruza de un punto. ¿Cuál es la probabilidad
           de que ambas soluciones hijas sean clones (idénticas) de sus padres?\\[\baselineskip]
-        \textbf{Solución:} Sean $a$ y $b$ los cromosomas padres tal que $a \neq b$ y $c$ es
-        el punto de cruza descrito anteriormente, entonces los hijos $p$ y $q$ de la cruza
-        de $a$ y $b$ resultan en
+        \textbf{Solución:} La cruza de dos cromosomas padres $a$ y $b$ de longitud $L$,
+        tal que $a\neq b$, en un punto $c \in \{1, ..., L-1\}$ genera dos hijos $p$ y $q$ \\
             \begin{equation*}\begin{split} \begin{aligned}
                 p &= a_1 + b_2 \\
                 q &= b_1 + a_2
             \end{aligned} \end{split} \end{equation*}
         donde $a_1$ y $b_1$ son las cadenas de los cromosomas padres $a$ y $b$
         respectivamente antes del punto de cruza $c$ y $a_2$ y $b_2$ son las cadenas después del
-        punto de cruza. Para que $p$ y $q$ sean hijos idénticos a los padres se tiene que cumplir
-        que $a_1 = b_1$ o $b_2 = a_2$, por lo tanto la probabilidad de que eso suceda dependerá
-        del la posición del punto de cruza y la longitud de las sub-cadenas que genera. En otras
-        palabras estamos buscando la probabilidad de que exista una sub-cadena $s$ de $a$ y $b$
-        en los índices $[0, c]$ o $[c, L-1]$
+        punto de cruza. Dicho lo anterior, se considera que las soluciones hijas $p$ y $q$ son clones de sus
+        padres si $(p=a \land q=b) \lor (p=b \land q=a)$ recordando que si ambos
+        se cumplen, entonces $a=b$ y eso no es posible en el planteamiento dado. También
+        se puede ver que si las subcadenas de lo padres cumplen que $a_1 = b_1 = k$ o $a_2 = b_2 = k$,
+        donde $k$ es una cadena cualquiera que existe en la misma región dentro de los padres, entonces
+        los hijos serán clones de los padres. Lo anterior es cierto ya que:
+            \begin{equation*}\begin{split} \begin{gathered}
+                \text{si } a_1 = b_1 = k, \text{ entonces:} \\
+                a = k + a_2,
+                b = k + b_2\\
+                p = k + b_2,
+                q = k + a_2\\
+                \implies p = b \text{ y } q = a \\
+            \end{gathered} \end{split} \end{equation*}
+            \begin{equation*}\begin{split} \begin{gathered}
+                \text{o si } a_2 = b_2 = k, \text{ entonces:} \\
+                a = a_1 + k,
+                b = b_1 + k\\
+                p = a_1 + k,
+                q = b_1 + k\\
+                \implies p = a \text{ y } q = b
+            \end{gathered} \end{split} \end{equation*}
+
+        Por lo tanto, la probabilidad que nos interesa hallar es el evento donde
+        $a_1 = b_1$ o (exclusivo) $a_1 = b_2$. Redefinimos la notación de
+        los cromosomas de los padres $a$ y $b$ como
+            \begin{equation*}\begin{split} \begin{aligned}
+                a &= a_1a_2a_3\; ...\; a_ca_{c+1}a_{c+2}\; ...\; a_{L} \\
+                b &= b_1b_2b_3\; ...\; b_cb_{c+1}b_{c+2}\; ...\; b_{L}
+            \end{aligned} \end{split} \end{equation*}
+        De tal forma que nos interesa que $a_1a_2\; ...\; a_c=b_1b_2\; ...\; b_c$ o (exclusivo)
+        $a_{c+1}a_{c+2}\; ...\; a_L=b_{c+1}b_{c+2}\; ...\; b_L$.
+        Usando una codificación diferente, definamos una nueva serie de cadenas $r$ tal que
+            \begin{equation*}\begin{split} \begin{aligned}
+                r &= a + b = a_1a_2a_3\; ...\; a_ca_{c+1}a_{c+2}\; ...\; a_{L} + b_1b_2b_3\; ...\; b_cb_{c+1}b_{c+2}\; ...\; b_{L} \\
+                r_1 &= a_1a_2a_3\; ...\; a_cb_1b_2b_3\; ...\; b_c \\
+                r_2 &= a_{c+1}a_{c+2}\; ...\; a_{L}b_{c+1}b_{c+2}\; ...\; b_{L} \\
+            \end{aligned} \end{split} \end{equation*}
+
+        Donde el número de cadenas posibles de $r$ es igual a $2^{2L}$, las cadenas posibles de $r_1$ es $2^{2c}$
+        y las cadenas posibles de $r_2$ es $2^{2L-2c}$. Y ya que nos interesa que suceda únicamente un
+        solo caso de $r_1$ o un sólo caso de $r_2$ (descrito arriba), la probabilidad $p$ de
+        que la cruza genere clones es:
+            \begin{equation*}\begin{split} \begin{gathered}
+                p = \frac{1}{2^{2L}} - \frac{1}{2^{2c}} - \frac{1}{2^{2L-2c}}
+            \end{gathered} \end{split} \end{equation*}
+    \clearpage
     \item El problema \textit{\textbf{one-max}} consiste en buscar una cadena binaria de $L$
           bits con el mayor número de unos posible, es decir, el fitness de una cadena es el
           número de unos que contiene, por lo que se quiere maximizar $f(x) = \sum_{i=1}^{L} x_i$
