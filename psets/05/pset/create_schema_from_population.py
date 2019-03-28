@@ -27,7 +27,7 @@ def compute_schemas(source, output):
 
 
 if __name__ == '__main__':
-    for i in range(1, 101):
+    for i in range(0, 101):
         in_file = '../data/individuals/{}.txt'.format(i)
         out_file = '../data/schemas/{}.schema'.format(i)
         compute_schemas(in_file, out_file)
