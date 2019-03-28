@@ -1,6 +1,5 @@
 """Create schema from population."""
 
-import argparse
 import schematax
 import time
 
@@ -28,8 +27,7 @@ def compute_schemas(source, output):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('population', type=str)
-    parser.add_argument('output', type=str)
-    args = parser.parse_args()
-    compute_schemas(args.population, args.output)
+    for i in range(1, 101):
+        in_file = '../data/individuals/{}.txt'.format(i)
+        out_file = '../data/schemas/{}.schema'.format(i)
+        compute_schemas(in_file, out_file)
