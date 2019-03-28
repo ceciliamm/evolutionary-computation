@@ -12,5 +12,6 @@
     * **`individuals.py`** contain the individuals abstraction
 * **`PSet Description.pdf`** is the original Problem Set definition.
 * **`P05.pdf`/`P05.tex`** problem set solved, start here. The latter is the LaTeX source code.
+* **`data/`** data obtained during algorithms execution.
 * **`Jupyter Notebooks`**:
-    * **`PSet.ipynb`** contains the solution of the exercises.
+    * **`PSet.ipynb`** contains the solution to the exercises.
