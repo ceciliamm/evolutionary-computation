@@ -34,8 +34,8 @@ class ES1P1:
         while self.generations < self.MAX_TRIALS and precision > self.PRECISION:
             child = self.mutate(self.parent)
 
-            if child.fitness > self.parent.fitness:
-                precision = child.fitness - self.parent.fitness
+            if child.fitness < self.parent.fitness:
+                precision = self.parent.fitness - child.fitness
                 self.parent = child
                 self.successful_mutations.append(1)
             else:

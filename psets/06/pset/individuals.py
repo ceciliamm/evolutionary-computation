@@ -17,3 +17,6 @@ class Sphere:
     @property
     def fitness(self):
         return sum([x**2 for x in self.chromosome])
+
+    def __str__(self):
+        return ', '.join(['{:.4f}'.format(x) for x in self.chromosome])

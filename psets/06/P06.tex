@@ -63,6 +63,7 @@
             \includegraphics[scale=.6]{./assets/ex1-results2.png}
         \end{center}
 
+    \clearpage
     \item \textbf{[Ejercicio de programación]} Implementa el algoritmo (1+1)-ES. Prueba
           tu algoritmo sobre la función \textit{Sphere}, la cuál es una función unimodal
           $d$-dimensional definida como:
@@ -73,6 +74,27 @@
 
         Donde cada $x_i \in [-100, 100]$. Utiliza un parámetro $\sigma = 1$ y un punto
         inicial $\vec{x} = (x_1, ..., x_d) = (-99,...,-99)$
+
+        \begin{enumerate}
+            \item Ejecuta tu algoritmo para $d=10$ y para $d=100$. ¿Qué tan cerca del óptimo
+            converge y qué tan rápido?
+
+            \textbf{Respuesta:} Para $d=10$ con una precisión de $0.01$, el algoritmo converge
+            después $391$ mutaciones exitosas con un valor promedio para cada $x_i$ de $0.00263$.
+            Para $d=100$ con la misma precisión, el algoritmo converge después de $1337$
+            mutaciones con un valor promedio para cada $x_i$ de $0.1486$.
+
+            \item Implementa la regla del $1/5$ y vuelve a ejecutar tu algoritmo. ¿Qué diferencias
+            observas respecto a la ejecución anterior?
+
+            \textbf{Respuesta:} La diferencia sólo se notó en el número de mutaciones exitosas
+            siendo reducido a $374$ con $d=10$ y un $x_i$ promedio de $-0.1249$ y para $d=100$
+            un número de mutaciones exitosas $1211$ con un $x_i$ promedio de $-0.03162$.
+        \end{enumerate}
+
+        \begin{center}
+            \includegraphics[scale=.6]{./assets/ex-2.png}
+        \end{center}
 \end{enumerate}
 
 \end{document}
