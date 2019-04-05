@@ -79,17 +79,24 @@
             \item Ejecuta tu algoritmo para $d=10$ y para $d=100$. ¿Qué tan cerca del óptimo
             converge y qué tan rápido?
 
-            \textbf{Respuesta:} Para $d=10$ con una precisión de $0.01$, el algoritmo converge
-            después $391$ mutaciones exitosas con un valor promedio para cada $x_i$ de $0.00263$.
-            Para $d=100$ con la misma precisión, el algoritmo converge después de $1337$
-            mutaciones con un valor promedio para cada $x_i$ de $0.1486$.
+            \textbf{Respuesta:} Para $d=10$ con una precisión de $0.01$ y un máximo de $10^6$ iteraciones,
+            el algoritmo concluye después $413$ mutaciones exitosas debido a haber alcanzado el número
+            máximo de iteraciones con un valor promedio para cada $x_i$ de $-0.068264$
+            y un fitness de $0.34359$ (el cual no cumple con la precisión).
+            Para $d=100$ con la misma precisión, el algoritmo concluye después de $1296$
+            mutaciones exitosas con un valor promedio para cada $x_i$ de $0.03281650$ y fitness de
+            $125.16605$ (nuevamente lejano al óptimo y terminando debido al número máximo de iteraciones).
 
             \item Implementa la regla del $1/5$ y vuelve a ejecutar tu algoritmo. ¿Qué diferencias
             observas respecto a la ejecución anterior?
 
-            \textbf{Respuesta:} La diferencia sólo se notó en el número de mutaciones exitosas
-            siendo reducido a $374$ con $d=10$ y un $x_i$ promedio de $-0.1249$ y para $d=100$
-            un número de mutaciones exitosas $1211$ con un $x_i$ promedio de $-0.03162$.
+            \textbf{Respuesta:} La diferencia es fundamental en el sentido de que los algoritmos sí
+            convergieron y en menos iteraciones que de las que el límite permitía ($10^6$). Aproximadamente
+            el $\sim 20\%$ de las mutaciones fueron exitosas en ambos casos a comparación del caso
+            anterior donde menos del $0.001\%$ de las mutaciones fueron exitosas. En ambos casos se
+            logró obtener fitness bajo la precisión solicitada: para $d=10$ se obtuvo $0.00907$ y para
+            $d=100$ se obtuvo $0.00987$ con $515$ y $22,867$ iteraciones respectivamente y $120$ y $5,715$
+            mutaciones exitosas respectivamente.
         \end{enumerate}
 
         \begin{center}

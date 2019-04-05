@@ -4,7 +4,7 @@ This module contain the (1+1)-ES implementation.
 """
 
 from .individuals import Sphere
-import random
+from .random import gen_normal
 
 
 class ES1P1:
@@ -30,15 +30,14 @@ class ES1P1:
 
     def run(self) -> None:
         """Run evolution strategy."""
-        precision = self.parent.fitness
-        while self.generations < self.MAX_TRIALS and precision > self.PRECISION:
+        while self.generations < self.MAX_TRIALS and self.parent.fitness > self.PRECISION:
             child = self.mutate(self.parent)
 
             if child.fitness < self.parent.fitness:
-                precision = self.parent.fitness - child.fitness
                 self.parent = child
                 self.successful_mutations.append(1)
             else:
+                self.update_std(self.parent)
                 self.successful_mutations.append(0)
 
             self.generations += 1
@@ -47,10 +46,10 @@ class ES1P1:
     def mutate(self, parent: Sphere) -> Sphere:
         """Mutate parent."""
         child = Sphere(parent.chromosome[:])
-        self.update_std(child)
+        child.std = parent.std
         d = len(child.chromosome)
         for i in range(d):
-            child.chromosome[i] += random.gauss(0, child.std)
+            child.chromosome[i] += gen_normal(child.std)
             if child.chromosome[i] < -100:
                 child.chromosome[i] = -100
             elif child.chromosome[i] > 100:

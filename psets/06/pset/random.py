@@ -4,7 +4,7 @@ import math
 import random
 
 
-def gen_normal():
+def gen_normal(sigma=1):
     """Generate new random number.
 
     Return a normally-distributed value
@@ -13,7 +13,7 @@ def gen_normal():
     """
     u1 = random.random()
     u2 = random.random()
-    return (
+    return sigma * (
         math.sqrt(-2 * math.log(u1)) *
         math.cos(2 * math.pi * u2)
     )
