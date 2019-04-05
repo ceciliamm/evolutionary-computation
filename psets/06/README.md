@@ -12,6 +12,9 @@
 ## Files structure
 
 * **`pset/`** is a Python module that contains:
+    * **`algorithms.py`** which have the ES algorithms implementation
+    * **`individuals.py`** contain the individuals abstraction
+    * **`random.py`** contain the box-muller pseudo-random number generator
 * **`PSet Description.pdf`** is the original Problem Set definition.
 * **`P06.pdf`/`P06.tex`** problem set solved, start here. The latter is the LaTeX source code.
 * **`Jupyter Notebooks`**:
