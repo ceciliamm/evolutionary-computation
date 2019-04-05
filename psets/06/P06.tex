@@ -102,6 +102,33 @@
         \begin{center}
             \includegraphics[scale=.6]{./assets/ex-2.png}
         \end{center}
+
+    \clearpage
+    \item \textbf{[Ejercicio de programación]} Implementa el algoritmo $(\mu + \lambda)$-ES
+          usando mutación no correlacionada (una sola $\sigma$ para todas las dimensiones
+          del problema). Para adaptar el tamaño de la mutación de $\sigma$ usa la recomendación
+          dada en clases $\tau = 1/\sqrt{d}$. Prueba tu algoritmo en la función \textit{Sphere}
+          y también en la función \textit{Ackley}, definida como:
+
+          \begin{equation*} \begin{split} \begin{gathered}
+              f(\vec{x}) = -20 \cdot \exp
+                \Bigg(-0.2 \cdot \sqrt{\frac{1}{d} \cdot \sum_{i=1}^d x_i^2} \Bigg) -
+                \exp \Bigg(\frac{1}{d} \cdot \sum_{i=1}^d \cos{(2 \pi x_i)}\Bigg) +
+                20 + \exp (1)
+          \end{gathered} \end{split} \end{equation*}
+
+          donde cada $x_i \in [-30, 30]$. Prueba con diferntes valores de $\mu$ y -$\lambda$
+          hasta alcanzar convergencia al óptimo global con un error por debajo de $0.001$.
+          Puedes usar la recomendación de parámetros $\frac{\lambda}{\mu} \approx 7$.
+
+        \begin{enumerate}
+            \item Ejecuta tu algoritmo en $d=2$ y grafica los contornos de nivel de
+                la función en los nivelos de $f(x): 2, 4, 6, 8, 100, 12, 14, 16, 18$ y $20$.
+                \begin{center}
+                    \includegraphics[scale=.6]{./assets/ex3-a-sphere.png}
+                \end{center}
+            \item ¿Qué tan bien funciona $d=10$ respecto a la $(1+1)$-ES?
+        \end{enumerate}
 \end{enumerate}
 
 \end{document}
