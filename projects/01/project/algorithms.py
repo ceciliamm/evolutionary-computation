@@ -146,7 +146,8 @@ class ESMuPLambda:
         """Store results of given population in a generation file."""
         gen_str = generation.zfill(int(np.log10(self.MAX_TRIALS)))
         filename = '{}/{}.results'.format(self.output_dir, gen_str)
-        content = '{}\n'.format(pop_fitness)
+        content = '{n}, {y}, {x}\n'.format(n=self.n, y=self.y, x=self.x)
+        content += '{}\n'.format(pop_fitness)
         for individual in population:
             content += ', '.join(['{0:.{1}f}'.format(x, 10) for x in individual.chromosome]) + '\n'
         f = open(filename, 'w')

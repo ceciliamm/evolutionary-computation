@@ -54,12 +54,19 @@ class AB:
     @property
     def fitness(self) -> float:
         """Compute AB's fitness based on Borschbach-Dreckmann."""
-        bin_width = self.x / self.n
         total_sum = 0.0
-        for i in range(self.n - 2):
-            cur_y, next_y = self.chromosome[i], self.chromosome[i + 1]
-            total_sum += (
-                math.sqrt((bin_width**2) + (next_y - cur_y)**2) /
-                (math.sqrt(self.y - cur_y) + math.sqrt(self.y - next_y))
+        points = [self.y] + self.chromosome + [0]
+        current_x = 0
+        bin_width = self.x / self.n
+        for i in range(self.n):
+            next_x = current_x + bin_width
+            si = np.sqrt(
+                ((next_x - current_x)**2) +
+                ((points[i+1] - points[i])**2)
             )
+            # print("Y:", self.y, "Yi:", points[i], "Yi1:", points[i+1])
+            # print('*' * 40)
+            d = np.sqrt(self.y - points[i]) + np.sqrt(self.y - points[i+1])
+            total_sum += si/d
+            current_x = next_x
         return math.sqrt(2 / 9.81) * total_sum
