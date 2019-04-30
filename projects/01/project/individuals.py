@@ -56,17 +56,12 @@ class AB:
         """Compute AB's fitness based on Borschbach-Dreckmann."""
         total_sum = 0.0
         points = [self.y] + self.chromosome + [0]
-        current_x = 0
         bin_width = self.x / self.n
         for i in range(self.n):
-            next_x = current_x + bin_width
             si = np.sqrt(
-                ((next_x - current_x)**2) +
+                ((bin_width)**2) +
                 ((points[i+1] - points[i])**2)
             )
-            # print("Y:", self.y, "Yi:", points[i], "Yi1:", points[i+1])
-            # print('*' * 40)
             d = np.sqrt(self.y - points[i]) + np.sqrt(self.y - points[i+1])
             total_sum += si/d
-            current_x = next_x
-        return math.sqrt(2 / 9.81) * total_sum
+        return total_sum

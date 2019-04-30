@@ -44,6 +44,7 @@ class ESMuPLambda:
 
         self.generations = 0
         self.population = []  # type: Population
+        self.results = []  # type: Tuple(float, List[Population])
 
         self.store_results = store_results
         self.output_dir = output_dir if output_dir else self.create_output_dir()
@@ -59,6 +60,7 @@ class ESMuPLambda:
             # Off-algorithm features
             if self.store_results:
                 self.store_population(self.population, pop_fitness, str(self.generations))
+            self.results.append((pop_fitness, self.population))
 
             offspring = self.get_offspring(self.population)
             union = self.population + offspring
@@ -67,11 +69,6 @@ class ESMuPLambda:
             precision = abs(pop_fitness - new_pop_fitness)
             pop_fitness = new_pop_fitness
             self.generations += 1
-
-        print("Algorithm finished:")
-        print("\tGenerations:", self.generations)
-        print("\tLast population mean fitness:", pop_fitness)
-        self.store_population(self.population[0: 1], self.population[0].fitness, 'BEST')
 
     def initialize(self) -> Population:
         """Initialize parents population."""
