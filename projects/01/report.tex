@@ -162,7 +162,7 @@
         es el vector $a = \{a_1, a_2, ..., a_{n-1}, \sigma_a\}$ donde $\sigma_a$
         es la desviación estándar utilizada como parámetro de control y cada
         $a_i, i=\{i,...,n-1\}$, representa un valor $y_i$ de la definición de $AB$
-        para $P_i(x_i, y_i)$. Es importante mencionar que $a_i \in [S, A_{vert}]$
+        para $P_i(x_i, y_i)$. Es importante mencionar que $a_i \in [S_i, A_{vert}]$
         para un $S_i$ arbitrario $\leq 0$. Los valores $x_i$ del punto $P_i$ son los descritos
         en la \textbf{Definición 2.1.}
     \end{subsection}
@@ -250,6 +250,29 @@
     \end{subsection}
 \end{section}
 
+\begin{section}{Apéndice A: Ejecución del código}
+    El código está compuesto de dos archivos principales:
+    \begin{enumerate}
+        \item \texttt{algorithms.py}: Contiene la implementación del algoritmo
+              ES-$(\mu + \lambda)$ en una clase llamada \texttt{ESMuPLambda}.
+              Para iniciar la ejecución del algoritmo se deben proveer los valores
+              iniciales que el constructor solicita y después ejecutar el método
+              \texttt{run}. Al finalizar la ejecución, la instancia de la clase
+              contará con la lista \texttt{results} como propiedad la cuál está
+              compuesta de tuplas de dos elementos; el primero siendo el fitness
+              promedio de la $i$-ésima población y el segundo siendo una lista
+              de $\mu$ individuos referentes a la $i$-ésima generación.
+        \item \texttt{individuals.py}: Contiene la clase \texttt{AB} con el
+              la representación de una curva AB. Ésta clase no tiene uso directo,
+              sin embargo, es usada por \texttt{ESMuPLambda} durante su ejecución.
+              Ésta cuenta con las propiedades \texttt{chromosome} y \texttt{fitness}.
+    \end{enumerate}
+    Adicionalmente se incluye un notebook de Jupyter con ejemplos de uso
+    de la clase \texttt{ESMuPLambda} y dos métodos para generar un conjunto
+    de imagenes para después ser convertidos en GIFs, para lo último se necesitan
+    los folders \texttt{output/curves} y \texttt{output/mean} y ejecutar el
+    archivo \texttt{./build\_gifs.sh}.
+\end{section}
 
 % References
 \clearpage
