@@ -1,0 +1,82 @@
+\documentclass[10pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+
+\usepackage{csquotes}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+
+\begin{document}
+
+\begin{center}
+    {\large \bfseries Práctica 7: Particle Swarm Optimization (PSO) y Evolución Diferencial (DE) \par}
+    \vspace{0.2cm}
+    Facultad de Ciencias, UNAM - Pablo A. Trinidad - 10 Mayo 2019
+\end{center}
+
+\begin{enumerate}
+    \item \textbf{[Ejercicio teórico]} Identifica y menciona cuáles son ls
+    componentes de búsqueda relacionados con la exploración y la explotación
+    del espacio de búsqueda en el algoritmo de PSO y DE respectivamente.
+        \begin{itemize}
+            \item \textbf{PSO}: La componente de explotación de este algoritmo
+                  está dado por el hecho de que la velocidad de una partícula
+                  es alterada tomando en cuenta su mejor posición hasta el momento
+                  mientras que la exploración se da por el hecho de que se toma
+                  en cuenta la posición de los vecinos, así como la posición de
+                  la partícula con mejor \textit{fitness} dentro de todo
+                  el \textit{swarm}.
+            \item \textbf{DE}: La componente de explotación de éste algoritmo
+                  está dada por el hecho de que una nueva solución particular
+                  de un agente únicamente se aceptará si mejora el \textit{fitness},
+                  mientras que la componente de exploración únicamente sucede
+                  al inicio cuando los agentes son ubicados de manera aleatoria.
+        \end{itemize}
+    \item \textbf{[Ejercicio teórico]} ¿Cómo modificaría el algoritmo de PSO
+    canónico visto en clase para incluir aceleración?\\
+        \textbf{Respuesta:} Utilizaría la noción de tiempo y la definición
+        de aceleración ($v=at$) para alterar cada $v_d$ de una partícula. Si
+        $p_d$ disminuye (con la noción del espacio de búsqueda), entonces la
+        aceleración también disminuiría.
+    \item \textbf{[Ejercicio teórico]} ¿Cuál es la diferencia entre la versión
+    síncrona y la versión asíncrona del algoritmo PSO?
+        \textbf{Respuesta:} Como \cite{pso-sync-vs-async} menciona, un algoritmo
+        de optimización síncrono es aquel que requiere un
+        \textit{punto de sincronización} al final de cada iteración para reunir
+        los resultados y actualizar las variables de control, por el contrario,
+        el método asíncrono no requiere de un \textit{punto de sincronización}
+        para determinar la nueva dirección de búsqueda o los nuevos valores de
+        las valores de los parámetros de control por lo que los cómputos y las
+        partículas pueden ser distribuidos a través de múltiples recursos.
+        Adicionalmente y en el contexto particular de PSO la síncrona
+        actualiza las velocidades y posiciones de las partículas al final de cada
+        iteración, mientras que la asíncrona que actualiza la posición y velocidad
+        de las partículas continuamente basado en la información disponible.
+    \item \textbf{[Ejercicio de programación]}
+    \item \textbf{[Ejercicio teórico]}
+    \item \textbf{[Ejercicio de programación]}
+\end{enumerate}
+
+
+% References
+\clearpage
+\begin{thebibliography}{9}
+    \bibitem{hac-spso}
+        Maurice Clerc.
+        \textit{Standard Particle Swarm Optimisation.}
+        2012. \texttt{hal-00764996}
+    \bibitem{pso-sync-vs-async}
+        Koh, B. I., George, A. D., Haftka, R. T., \& Fregly, B. J. (2006).
+        \textit{Parallel asynchronous particle swarm optimization.}
+        International journal for numerical methods in engineering,
+        67(4), 578–595. doi:10.1002/nme.1646
+\end{thebibliography}
+
+\end{document}
