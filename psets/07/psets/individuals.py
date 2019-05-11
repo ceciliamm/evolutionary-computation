@@ -15,6 +15,8 @@ class Individual:
         """Initialize individual."""
         self.chromosome = chromosome
         self.N = len(chromosome)
+        self.df = 1.0  # type: float
+        self.successful_mutations = []  # type: List[int]
 
     @property
     def fitness(self) -> float:

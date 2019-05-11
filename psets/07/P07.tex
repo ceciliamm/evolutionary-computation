@@ -121,8 +121,83 @@
     \begin{center}
         \includegraphics[scale=0.6]{assets/griewangk-function.png}
     \end{center}
-    \item \textbf{[Ejercicio teórico]}
-    \item \textbf{[Ejercicio de programación]}
+    \item \textbf{[Ejercicio teórico]} Proponer una ligera moficación al
+    algoritmo DE.\\
+    \textbf{Respuesta:} Al igual que en las estrategias evolutivas, el parámetro
+    de escala (\textit{differential weight}) puede ser parte del cromosoma
+    de un individuo, dicho lo anterior reglas empíricas como la regla de los
+    quintos podrían ser aplicadas.
+    \item \textbf{[Ejercicio de programación]} Implementa el algoritmo propuesto
+    y pruébalo con el mismo conjunto de funciones. Compara los resultados
+    obtenidos entre \texttt{DE} canónico y tu propuesta (\texttt{CDE}).\\[\baselineskip]
+    \textbf{Respuesta:} La comparasión de algoritmos trajo resultados
+    muy particulares dependiendo del problema y la métrica a evaluar, a
+    continuación se desglozan algunas de las observaciones y se recomienda
+    visitar el \texttt{Jupyter Notebook} con los resultados completos obtenidos:
+    \begin{enumerate}
+        \item \textbf{Sphere}: Observamos que el número de generaciones
+               o iteraciones que tuvo que ejecutarse cada algoritmo sufre una
+               intersección al rededor de problemas de tamaño $d=15$. Para
+               problemas de tamaño $d<15$ sucede que \texttt{CDE} tiende a
+               ejecutarse un número mayor de iteraciones que \texttt{CE} aunque
+               con un extraño \textit{patrón de picos} aparentemente cada
+               múltiplo de 5. A partir de $d\geq 15$ los papeles cambian y la
+               versión canónica suele requerir un número mayor de iteraciones al
+               punto que para $d=30$ obtenemos que \texttt{CE} se ejecuta 840
+               iteraciones mientras que \texttt{CDE} únicamente 587.
+            \begin{center}
+                \includegraphics[scale=0.6]{assets/sphere-gens.png}
+            \end{center}
+            Y tal vez la pregunta natural que puede surgir es ¿cómo es que esto
+            afecta a la calidad de las soluciones? Sabiendo que los óptimos
+            de la función se encuentra en los valores $x_i=0$ para $i \in [1, d]$.
+            Notamos que la calidad de la soluciones se intersectan al rededor del mismo
+            punto de cruza mencionado anteriormente. A pesar de haberse ejecutarse por
+            pocas iteraciones, \texttt{CDE} comienza encontrar mejores soluciones
+            conforme el número de generaciones entre \texttt{DE} y \texttt{CDE}
+            comienza a divergir. Es importante notar que antes de dicho punto
+            de cruza, $d\approx 15$, \texttt{CDE} muestra dos intervalos con muy
+            malas soluciones relativas a las encontradas por \texttt{DE}.
+            \begin{center}
+                \includegraphics[scale=0.6]{assets/sphere-popfitness.png}
+            \end{center}
+            Por último podemos observar el mismo punto de cruza se mantiene
+            respecto a la mejor solución encontrada al final de la ejecución,
+            manteniendo también la dramática diferencia para $d=30$, siendo
+            que \texttt{DE} obtuvo el mejor fitness con $0.000064$ mientras
+            que \texttt{CDE} lo obtuvo con $0.0000013$.
+            \begin{center}
+                \includegraphics[scale=0.6]{assets/sphere-best.png}
+            \end{center}
+        \item \textbf{Ackley}: Respecto a las generaciones, \texttt{CDE} pareció
+              mostrar siempre un número mayor de iteraciones requeridas antes
+              de converger aunque con un extraño pico entre $d=25$ y $d=30$ donde
+              parece que \texttt{CDE} convergió de manera extremadamente
+              prematura afectando así el detalle las otras dos métricas, sin
+              embargo, el experimento puede ser repetido para obtener más información
+              respecto a este problema:
+              \begin{center}
+                \includegraphics[scale=0.6]{assets/ackley-compound.png}
+              \end{center}
+        \item \textbf{Griewangk}: En este caso particular, los papeles se
+              invirtieron respecto a Sphere en la primera métrica (número de iteraciones) ya que
+              \texttt{CDE} converve después que \texttt{DE} para valores de
+              $d\leq 17$ y luego sucede lo opuesto para valores $d>17$.
+              \begin{center}
+                \includegraphics[scale=0.6]{assets/griewangk-gen.png}
+              \end{center}
+              Algo muy extraño sucedió respecto a la calidad de la soluciones
+              y fue que \texttt{DE} convergió en muy malas soluciones la mayor
+              parte del tiempo, mientras que \texttt{CDE} se mantuvo muy
+              cerca del óptimo global sin importar la dimensión del problema.
+              \begin{center}
+                \includegraphics[scale=0.6]{assets/griewangk-fitness.png}
+              \end{center}
+              Dando diferencias tan extremas como la sucedida en $d=16$ donde
+              \texttt{DE} obtuvo la mejor solución con valor $0.766072$ y
+              \texttt{CDE} con valor $0.000009$, lo cuál también se reflejó
+              en el fitness promedio con los mismos valores.
+    \end{enumerate}
 \end{enumerate}
 
 

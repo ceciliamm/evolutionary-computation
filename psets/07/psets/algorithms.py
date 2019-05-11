@@ -62,7 +62,9 @@ class DE:
         agents = []  # type: List[Individual]
         while len(agents) < self.POP_SIZE:
             chromosome = [float(random.randint(self.S[0], self.S[1])) for _ in range(self.D)]
-            agents.append(self.PClass(chromosome))
+            agent = self.PClass(chromosome)
+            agent.df = self.F
+            agents.append(agent)
         return agents
 
     def mutate_agents(self, agents: List[Individual]) -> List[Individual]:
@@ -85,14 +87,18 @@ class DE:
                     ai = a.chromosome[j]
                     bi = b.chromosome[j]
                     ci = c.chromosome[j]
-                    new_y = ai + (self.F * (bi - ci))
+                    new_y = ai + (agent.df * (bi - ci))
                     new_chromosome[j] = self.reflect_gene(new_y)
 
             # Replace agent if candidate solution is better
             replacement_agent = self.PClass(new_chromosome)
+            replacement_agent.successful_mutations = agent.successful_mutations[:]
+            replacement_agent.df = agent.df
             if replacement_agent.fitness < agent.fitness:
+                replacement_agent.successful_mutations.append(1)
                 new_agents.append(replacement_agent)
             else:
+                agent.successful_mutations.append(0)
                 new_agents.append(agent)
 
         return new_agents
@@ -115,3 +121,28 @@ class DE:
         """Return the mean fitness of a given set of agents."""
         fitness = [x.fitness for x in agents]
         return np.mean(fitness)
+
+
+class CustomDE(DE):
+    """Custom Differential Evolution.
+
+    This custom implementation will add the initialize_agents weight
+    as part of and individual's information. Although it will
+    clearly not be used during fitness computation, it will be
+    used during mutation, as mutated as well using the one-fifth
+    success rule.
+    """
+
+    def mutate_agents(self, agents: List[Individual]) -> List[Individual]:
+        """After mutations, alter the DF value based on the one-fifth rule."""
+        # Retrieve base mutations
+        new_agents = super().mutate_agents(agents)
+        for agent in new_agents:
+            h = self.D
+            history = agent.successful_mutations[-h:]
+            success_rate = sum(history) / len(history) if len(history) > 0 else 0
+            if success_rate < 1/5:
+                agent.df *= 0.82
+            else:
+                agent.df *= 1.22
+        return new_agents
