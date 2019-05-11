@@ -8,6 +8,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
+\usepackage{graphicx}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[section]
@@ -59,7 +60,67 @@
         actualiza las velocidades y posiciones de las partículas al final de cada
         iteración, mientras que la asíncrona que actualiza la posición y velocidad
         de las partículas continuamente basado en la información disponible.
-    \item \textbf{[Ejercicio de programación]}
+    \item \textbf{[Ejercicio de programación]} Implementar el algoritmo evolutivo
+    diferencial básico y probar su funcionamiento minimizando las siguientes
+    funciones (utiliza $d=30$):
+        \begin{enumerate}
+            \item Sphere:
+                \begin{equation*} \begin{gathered}
+                    f(\vec{x}) = \sum_{i=1}^{d} x_i^2
+                \end{gathered} \end{equation*}
+                donde $x_i \in [-100, 100]$
+            \item Ackley:
+                \begin{equation*} \begin{gathered}
+                    f(\vec{x}) = -20 \cdot \exp \Bigg(
+                        -0.2 \cdot
+                        \sqrt{\frac{1}{d} \cdot \sum_{i=1}^{d} x_i^2}
+                    \Bigg) -
+                    \exp \Bigg(
+                        \frac{1}{d} \cdot \sum_{i=1}^{d} \cos(2\pi x_i)
+                    \Bigg) + 20 + \exp(1)
+                \end{gathered} \end{equation*}
+                donde $x_i \in [-30, 30]$
+            \item Griewangk:
+                \begin{equation*} \begin{gathered}
+                    f(\vec{x}) = 1 + \frac{1}{4000} \sum_{i=1}^d x_1^2 -
+                        \prod_{i=1}^d \cos \Bigg(\frac{x_i}{\sqrt{i}}\Bigg)
+                \end{gathered} \end{equation*}
+                donde $x_i \in [-600, 600]$
+        \end{enumerate}
+    Medir el mejor valor encontrado y el número de evaluaciones de función
+    realizadas. Puedes utilizar los siguientes parámetros en tu algoritmo.
+        \begin{itemize}
+            \item Tamaño de población $=100$,
+            \item $F=0.5$,
+            \item Criterio de paro: máximo de iteraciones $500,000$ o tolerancia
+            de error de $10^{-6}$ (lo que ocurra primero).
+        \end{itemize}
+    \textbf{Respuests:} Usando $F=0.75$ se obtuvieron los siguientes resultados:
+    \begin{center} \begin{tabular}{ |c|c|c|c| }
+        \hline
+        Problema & Generaciones & Fitness promedio & Mejor fitness \\
+        \hline
+        Sphere  & 852 & 0.000066 & 0.00003 \\
+        Ackley  & 885 & 0.0000719 & 0.0000478 \\
+        Griewangk  & 938 & 0.0000464 & 0.0000272 \\
+        \hline
+    \end{tabular} \end{center}
+    Adicionalmente se incluyen las animaciones de los resultados obtenidos
+    en $d=1$ dentro del folder \texttt{GIFs}. Algo raro que sucedió en la función
+    Ackley fue que el algoritmo convergía exageradamente rápido sin llegar al
+    óptimo global, la mayoría de las veces ni siquiere pasaba de  2 iteraciones.
+    Para evitar eso, se experimentó con los parámetros de control y se observó
+    que con un \textbf{crossover probability}$=0.1$ finalmente
+    el algoritmo comenzó a converger cerca del $0$ para todo $x_i$.
+    \begin{center}
+        \includegraphics[scale=0.6]{assets/sphere-function.png}
+    \end{center}
+    \begin{center}
+        \includegraphics[scale=0.6]{assets/ackley-function.png}
+    \end{center}
+    \begin{center}
+        \includegraphics[scale=0.6]{assets/griewangk-function.png}
+    \end{center}
     \item \textbf{[Ejercicio teórico]}
     \item \textbf{[Ejercicio de programación]}
 \end{enumerate}
